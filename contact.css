@@ -1,0 +1,235 @@
+body{
+      padding-top: 72px;
+}
+.contact-header {
+  text-align: center;
+  background: linear-gradient(90deg, #001F54, #004AAD);
+  color: white;
+  padding: 70px 20px;
+}
+.contact-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 60px 8%;
+  flex-wrap: wrap;
+}
+.contact-info {
+  flex: 1 1 40%;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+.contact-form {
+  flex: 1 1 40%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.contact-form button {
+  background-color: #004AAD;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contact-form button:hover {
+  background-color: #002F6C;
+}
+
+/* ---------------- NAVBAR ---------------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid black;
+    backdrop-filter: blur(8px);
+    padding: var(--space-md) 0;
+    box-shadow: var(--shadow-subtle);
+    transition: transform var(--norm) var(--ease);
+}
+.header.hidden {
+    transform: translateY(-100%);
+}
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+}
+.nav__toggle {
+    display: none; /* Hidden on desktop */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn{
+    background-color: #2e70f6;
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+/* === NAVBAR LAYOUT === */
+.nav-container {
+  padding: 8px;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo__text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.logo-icon {
+  font-size: 22px;
+}
+
+/* Nav menu */
+.nav__list {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__list .placeholder {
+  min-width: 120px; /* adjust based on your link width */
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* instead of space-between */
+  gap: 20px; /* spacing between nav, search, actions */
+}
+
+.nav__link {
+  position: relative;
+  text-decoration: none;
+  font-weight: 500;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.nav__link:hover {
+  color: #0046FF;
+}
+/* Underline hover effect */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #0046FF;
+  transition: width 0.3s ease;
+}
+.nav__link:hover::after {
+  width: 50%; /* shorter underline */
+}
+
+/* Active link stays highlighted */
+.nav__link.active {
+  color: #0046FF;
+}
+.nav__link.active::after {
+  width: 50%;
+}
+/* ---------------- FOOTER ---------------- */
+.site-footer {
+  background: #f9f9f9;
+  padding: 50px 8%;
+  text-align: center;
+  border-top: 2px solid #e0e0e0;
+}
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  text-align: left;
+}
+.footer-about h3 {
+  color: #004AAD;
+  margin-bottom: 10px;
+}
+.footer-links h4,
+.footer-social h4 {
+  margin-bottom: 10px;
+  color: #333;
+}
+.footer-links a,
+.footer-social a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+.footer-links a:hover,
+.footer-social a:hover {
+  color: #004AAD;
+}
+.footer-bottom {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .nav__list {
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    right: 6%;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    display: none;
+  }
+
+  .nav__list.show {
+    display: flex;
+  }
+
+  .nav__toggle {
+    display: block;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+    text-align: center;
+  }
+}

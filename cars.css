@@ -1,0 +1,361 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.car-listings {
+  padding: 100px 20px;
+}
+
+.car-listings h1 {
+  margin-bottom: 20px;
+}
+
+.car-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  padding-top: 100px;
+  width: 400px;
+}
+
+.car-detail img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.car-info {
+  flex: 1;
+}
+
+.cars-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.car-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.car-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.car-card h3 {
+  margin: 15px 0 5px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.car-card p {
+  color: #666;
+  font-size: 0.95rem;
+}
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
+  padding: 20px;
+  gap: 20px;
+  justify-content: center;
+}
+
+.cars-page .car-card {
+  width: 300px;
+  margin: auto;
+}
+.btn-view {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background:#0046FF;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.btn-view:hover {
+  background: blue;
+}
+/* Popup Modal */
+.detail-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.detail-modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+
+.detail-close {
+  position: absolute;
+  top: 20px; right: 30px;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.detail-btn-book {
+  background: #0046ff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.detail-btn-book:hover {
+  background: #0033cc;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* General Modal Styling */
+.detail-modal {
+  display: none; /* Initially hide the modal */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  overflow-y: auto; /* Allows scrolling on smaller screens */
+  padding: 20px;
+}
+
+.detail-modal-content {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 950px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  animation: fadeIn 0.3s ease-out; /* Add a smooth animation */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Close button */
+.detail-close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 36px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.detail-close:hover {
+  color: #333;
+}
+
+/* Main content layout with Flexbox */
+.detail-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Left side (Image and Details) */
+.detail-left {
+  flex: 2;
+  min-width: 300px; /* Prevents column from getting too narrow */
+}
+
+.detail-left img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+#carName {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+#carType {
+  font-size: 1rem;
+  color: #6c757d;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+/* Feature boxes layout */
+.detail-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.feature {
+  background: #f8f9fa;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Description and Extra Features */
+.detail-left h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+#carDesc {
+  line-height: 1.6;
+  color: #495057;
+}
+
+.extra-features {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.extra-features li {
+  color: #495057;
+}
+
+/* Right side (Booking Form) */
+.detail-right {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+#carPrice {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0046FF;
+  margin-bottom: 10px;
+}
+
+#carPrice span {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #6c757d;
+}
+
+.detail-right label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #343a40;
+  margin-top: 15px;
+}
+
+.detail-right input,
+.detail-right textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #495057;
+  transition: border-color 0.2s;
+}
+
+.detail-right input:focus,
+.detail-right textarea:focus {
+  outline: none;
+  border-color: #0046FF;
+}
+
+.detail-btn-book {
+  background: #0046FF;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 25px;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.detail-btn-book:hover {
+  background: #002f9e;
+}
+
+.note {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .detail-modal-content {
+    padding: 20px;
+  }
+  
+  .detail-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

@@ -1,0 +1,543 @@
+/*
+ * Components.css
+ * This file contains reusable styles for various UI components like buttons,
+ * cards, forms, and notifications, adhering to the design system.
+ */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f7;
+    margin: 0;
+}
+
+/* --- FIX ALIGNMENT --- */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    white-space: nowrap;
+}
+
+.nav__list {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 0;
+}
+
+#authBtn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    white-space: nowrap;
+}
+
+/* Logo link styling */
+.logo__text {
+    display: inline-block;
+    width: 140px;       /* same width for all pages */
+    cursor: pointer;
+    text-decoration: none; /* remove underline if any */
+}
+
+.logo__text img {
+    width: 100%;        /* makes the image fill the link width */
+    height: auto;       /* maintain aspect ratio */
+    display: block;
+}
+
+.logo__text:hover img {
+    opacity: 0.8;       /* subtle hover effect */
+}
+
+
+/* --- Navigation --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid black;
+    backdrop-filter: blur(8px);
+    padding: var(--space-md) 0;
+    box-shadow: var(--shadow-subtle);
+    transition: transform var(--norm) var(--ease);
+}
+.header.hidden {
+    transform: translateY(-100%);
+}
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+}
+.nav__toggle {
+    display: none; /* Hidden on desktop */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn{
+    background-color: #2e70f6;
+    color: #fff !important;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+/* === NAVBAR LAYOUT === */
+.nav-container {
+  padding: 8px;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo__text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.logo-icon {
+  font-size: 22px;
+}
+
+/* Nav menu */
+.nav__list {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__list .placeholder {
+  min-width: 120px; /* adjust based on your link width */
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* instead of space-between */
+  gap: 20px; /* spacing between nav, search, actions */
+}
+
+.nav__link {
+  position: relative;
+  text-decoration: none;
+  font-weight: 500;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.nav__link:hover {
+  color: #0046FF;
+}
+
+/* Underline hover effect */
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #0046FF;
+  transition: width 0.3s ease;
+}
+.nav__link:hover::after {
+  width: 50%; /* shorter underline */
+}
+
+/* Active link stays highlighted */
+.nav__link.active {
+  color: #0046FF;
+}
+.nav__link.active::after {
+  width: 50%;
+}
+
+/* Search bar */
+.nav__search form {
+  display: flex;
+  align-items: center;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.nav__search input {
+  border: none;
+  padding: 6px 12px;
+  outline: none;
+  background: none;
+}
+.nav__search button {
+  border: none;
+  background: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Action buttons */
+.nav__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-outline {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  transition: 0.3s;
+}
+.btn-outline:hover {
+  background: #f0f0f0;
+}
+
+.btn-primary {
+  padding: 6px 14px;
+  background: #0046FF;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.btn-primary:hover {
+  background: #002f9e;
+}
+
+
+/* === Login/Signup Modal === */
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+.login-modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+.login-modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.login-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Off-canvas menu on mobile */
+@media (max-width: 767px) {
+    .nav__toggle {
+        display: block;
+    }
+    .nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 70%;
+        max-width: 300px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        transform: translateX(100%);
+        transition: transform var(--norm) var(--ease);
+        z-index: 99;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        padding: var(--space-xxl) var(--space-lg);
+    }
+    .nav.is-open {
+        transform: translateX(0);
+    }
+    .nav__list {
+        flex-direction: column;
+        gap: var(--space-xl);
+        text-align: center;
+    }
+    .nav__link {
+        font-size: 1.25rem;
+    }
+    .nav__backdrop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 98;
+    }
+    body.nav-open {
+        overflow: hidden;
+    }
+}
+
+/* --- Buttons & Cards --- */
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-subtle);
+    padding: var(--space-lg);
+    transition: transform var(--norm) var(--ease), box-shadow var(--norm) var(--ease);
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(2, 8, 23, 0.1);
+}
+/* Cards with tilt effect */
+.card--tilt:hover {
+    transform: translateY(-4px) rotateZ(-1deg);
+}
+
+/* Ripple effect for buttons (JS will add .ripple class) */
+.button {
+    position: relative;
+    overflow: hidden;
+}
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+@keyframes ripple-effect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* --- Forms & Inputs --- */
+.form__group {
+    position: relative;
+}
+.form__floating-label {
+    position: absolute;
+    top: 50%;
+    left: var(--space-md);
+    transform: translateY(-50%);
+    color: var(--color-muted);
+    pointer-events: none;
+    transition: all var(--fast) var(--ease);
+}
+.form_input:focus + .form_floating-label,
+.form_input:not(:placeholder-shown) + .form_floating-label {
+    top: 8px;
+    font-size: 0.75rem;
+    color: var(--color-primary);
+}
+.form__input.is-valid {
+    border-color: var(--color-accent);
+}
+.form__input.is-invalid {
+    border-color: #EF4444; /* Tailwind red-500 */
+    animation: shake 0.5s;
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+/* --- Toast Notifications --- */
+.toast-container {
+    position: fixed;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+.toast {
+    position: relative;
+    background-color: var(--color-surface);
+    color: var(--color-dark);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-subtle);
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    animation: slideInRight var(--norm) var(--ease);
+}
+.toast--success {
+    border-left: 4px solid var(--color-accent);
+}
+.toast--error {
+    border-left: 4px solid #EF4444;
+}
+.toast__progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.toast__progress--bar {
+    height: 100%;
+    background-color: var(--color-accent);
+    animation: progressBarShrink 3s linear forwards;
+}
+@keyframes slideInRight {
+    from { transform: translateX(110%); }
+    to { transform: translateX(0); }
+}
+@keyframes progressBarShrink {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* Floating mobile CTA bar */
+.mobile-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+    z-index: 90;
+    display: none;
+}
+@media (max-width: 767px) {
+    .mobile-cta-bar {
+        display: block;
+    }
+}
+
+/* Footer */
+.site-footer {
+  border-bottom: 1px solid black;
+  padding: 40px 20px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 30px;
+}
+
+.footer-links a,
+.footer-social a {
+  display: block;
+  margin: 5px 0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #444;
+  padding-top: 15px;
+  font-size: 0.9rem;
+}
+
+
+/* --- Login/Signup Popup --- */
+.auth-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 2100; /* above car popup */
+}
+.auth-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease;
+}
+.auth-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
+.auth-form input {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.auth-btn {
+  background: #0046FF;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.auth-btn:hover {
+  background: #002f9e;
+}
+.switch-auth {
+  color: #0046FF;
+  cursor: pointer;
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.9);}
+  to {opacity: 1; transform: scale(1);}
+}
