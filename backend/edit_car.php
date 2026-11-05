@@ -7,10 +7,22 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin'){
     exit();
 }
 
-$id = $_GET['id'] ?? null;
-if(!$id) header("Location: manage_cars.php");
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+if(!$id) {
+    header("Location: manage_cars.php");
+    exit();
+}
 
-$car = $conn->query("SELECT * FROM cars WHERE id=$id")->fetch_assoc();
+$car_stmt = $conn->prepare("SELECT * FROM cars WHERE id = ?");
+$car_stmt->bind_param("i", $id);
+$car_stmt->execute();
+$car = $car_stmt->get_result()->fetch_assoc();
+$car_stmt->close();
+
+if (!$car) {
+    header("Location: manage_cars.php");
+    exit();
+}
 
 if(isset($_POST['update'])) {
     $name = $_POST['name'];
@@ -25,21 +37,37 @@ if(isset($_POST['update'])) {
 
     $image = $car['image'];
     if(!empty($_FILES['carImage']['name'])){
-        $image = '../uploads/' . basename($_FILES['carImage']['name']);
-        move_uploaded_file($_FILES['carImage']['tmp_name'], $image);
+        $image = time() . "_" . basename($_FILES['carImage']['name']);
+        move_uploaded_file($_FILES['carImage']['tmp_name'], '../uploads/' . $image);
     }
 
-    $sql = "UPDATE cars SET
-        name='$name', type='$type', transmission='$transmission', year='$year',
-        price='$price', seats='$seats', fuel='$fuel', location='$location',
-        description='$description', image='$image'
-        WHERE id=$id";
+    $stmt = $conn->prepare(
+        "UPDATE cars SET
+         name = ?, type = ?, transmission = ?, year = ?, price = ?, seats = ?,
+         fuel = ?, location = ?, description = ?, image = ?
+         WHERE id = ?"
+    );
+    $stmt->bind_param(
+        "sssidissssi",
+        $name,
+        $type,
+        $transmission,
+        $year,
+        $price,
+        $seats,
+        $fuel,
+        $location,
+        $description,
+        $image,
+        $id
+    );
 
-    if($conn->query($sql)){
+    if($stmt->execute()){
         echo "<script>alert('Car updated'); window.location='manage_cars.php';</script>";
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $stmt->error;
     }
+    $stmt->close();
 }
 ?>
 <link rel="stylesheet" href="admin.css">
@@ -80,4 +108,3 @@ if(isset($_POST['update'])) {
     <button type="submit" name="update" class="detail-btn-book">Update Car</button>
   </form>
 </div>
-

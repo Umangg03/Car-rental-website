@@ -28,14 +28,38 @@ if(isset($_POST['submit'])) {
     $targetFile = $uploadDir . $fileName;
 
     if(move_uploaded_file($_FILES['carImage']['tmp_name'], $targetFile)) {
-        $sql = "INSERT INTO cars (name, type, transmission, year, price, seats, fuel, location, description, image)
-                VALUES ('$name','$type','$transmission','$year','$price','$seats','$fuel','$location','$description','$fileName')";
-        if($conn->query($sql) === TRUE) {
+        $stmt = $conn->prepare(
+            "INSERT INTO cars
+             (name, type, transmission, year, price, seats, fuel, location, description, image)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        if (!$stmt) {
+            echo "Database Error: " . $conn->error;
+            exit();
+        }
+
+        $stmt->bind_param(
+            "sssidissss",
+            $name,
+            $type,
+            $transmission,
+            $year,
+            $price,
+            $seats,
+            $fuel,
+            $location,
+            $description,
+            $fileName
+        );
+
+        if($stmt->execute()) {
             echo "<script>alert('Car added successfully'); window.location='manage_cars.php';</script>";
             exit();
         } else {
-            echo "Database Error: " . $conn->error;
+            echo "Database Error: " . $stmt->error;
         }
+        $stmt->close();
     } else {
         echo "<script>alert('Image Upload failed. Check permissions.');</script>";
     }
